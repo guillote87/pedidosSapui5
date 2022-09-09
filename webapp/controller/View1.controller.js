@@ -38,7 +38,12 @@ sap.ui.define([
                 oDataFilter.push(
                     new Filter("StatusPedido", FilterOperator.EQ, this.getView().byId("status").getValue())
                 )
+               
+                        new Filter("I_FECHA_DESDE", FilterOperator.EQ, this.getView().byId("desdehasta").getDateValue()),
+                        new Filter("I_FECHA_HASTA", FilterOperator.EQ, this.getView().byId("desdehasta").getSecondDateValue())
+                
 
+                console.log(oDataFilter)
                 let queryFilter = new Array(
                     new Filter({
                         filters: oDataFilter,
