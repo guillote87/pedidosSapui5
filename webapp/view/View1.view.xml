@@ -1,0 +1,93 @@
+<mvc:View controllerName="pedidos.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+      
+      <fb:FilterBar id="filterBar"  header="Pedidos ({datosVarios>/count})"
+		                reset="onReset" search="onSearch" clear="onClear" cancel="onCancel" 
+		                filtersDialogClosed = "onFiltersDialogClosed"
+		                showRestoreButton="true" showClearButton="true">
+
+			<fb:filterGroupItems>
+            
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" visibleInFilterBar="true" name="A1" label="ORG VTA" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+				<ComboBox id="orgventa"
+					showSecondaryValues= "true"
+				items="{
+					model: 'org',
+					path: '/OrgVentaSet',
+					sorter: { path: 'Nombre' }
+				}">
+				<core:ListItem key="{org>Id}" text="{org>Id}" additionalText="{org>Nombre}" />
+			</ComboBox>
+					</fb:control>
+				</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="G2" groupTitle="Group2" visibleInFilterBar="true" name="A2" label="STATUS" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+						<Input id="status" type="Text"  change="onChange"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+		
+                </fb:filterGroupItems>
+	    </fb:FilterBar>
+	
+      
+       <Table
+				id="idTablaPedidos"
+				inset="false"
+                growingThreshold="10" 
+		items="{
+			path: 'datosVarios>/datos'
+		   }">
+				<columns>
+					<Column>
+						<Text text="Fecha Doc" />
+					</Column>
+					<Column>
+						<Text text="Org Ventas" />
+					</Column>
+					<Column>
+						<Text text="Usuario" />
+					</Column>
+					<Column>
+						<Text text="Status Pedido" />
+					</Column>
+					<Column>
+						<Text text="Valor Neto" />
+					</Column>
+				</columns>
+				<items>
+				<ColumnListItem>
+						<cells>
+							
+									<Text text="{datosVarios>FechaDoc}"/>
+								
+							
+							
+									<Text text="{datosVarios>OrgVentas}" />
+								
+							
+							
+									<Text text="{datosVarios>Usuario}" />
+								
+							
+							
+									<Text text="{path:'datosVarios>StatusPedido',
+									formatter:'.formatter.statusText'}" />
+								
+							
+							
+									<Text text="{datosVarios>ValorNeto}" />
+								
+							
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+    </Page>
+</mvc:View>
