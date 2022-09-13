@@ -29,11 +29,12 @@
 				<fb:FilterGroupItem groupName="__$INTERNAL$" name="FECHA" label="{i18n>dateRange}" partOfCurrentVariant="true" visibleInFilterBar="true"
 					visible="{view>/openDisplay}">
 					<fb:control>
-						<DateRangeSelection id="fecha" displayFormat="short" valueFormat="yyyy.MM.dd"  change="onDateChange"/>
+						<DateRangeSelection id="fecha" displayFormat="short" valueFormat="yyyy-MM-dd-HH-mm-ss"  change="onDateChange"/>
 					</fb:control>
 				</fb:FilterGroupItem>
 			</fb:filterGroupItems>
 		</fb:FilterBar>
+
 
 
 		<Table id="idTablaPedidos" inset="false"  growing="true"

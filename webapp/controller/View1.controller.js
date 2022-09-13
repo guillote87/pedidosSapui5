@@ -34,7 +34,11 @@ sap.ui.define([
                 var oModel = this.oView.getModel()
 
                 var oDataFilter = new Array()
-
+                var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "YYYYMMdd" }); 
+// Format the date
+                var desde = dateFormat.format(this.getView().byId("fecha").getDateValue());
+                var hasta = dateFormat.format(this.getView().byId("fecha").getSecondDateValue());
+           
                 oDataFilter.push(
                     new Filter("OrgVentas", FilterOperator.EQ, this.getView().byId("orgventa").getValue())
                 )
@@ -42,7 +46,7 @@ sap.ui.define([
                     new Filter("StatusPedido", FilterOperator.EQ, this.getView().byId("status").getValue())
                 )
                 oDataFilter.push(
-                    new Filter("FechaCreacion", FilterOperator.BT, this.getView().byId("fecha").getDateValue(),this.getView().byId("fecha").getSecondDateValue())
+                    new Filter("FechaCreacion", FilterOperator.BT, desde,hasta)
                     )
                 
                 console.log(oDataFilter)
