@@ -20,10 +20,16 @@
 						</ComboBox>
 					</fb:control>
 				</fb:FilterGroupItem>
-				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" visibleInFilterBar="true" name="A2"
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" visibleInFilterBar="true" name="status"
 					label="STATUS" labelTooltip="Tooltip GroupItem Example">
 					<fb:control>
-						<Input id="status" type="Text" change="onChange" />
+						<ComboBox id="status" showSecondaryValues="true" items="{
+										model: 'status',
+										path: '/items',
+										sorter: { path: 'id' }
+										}">
+							<core:ListItem key="{status>id}" text="{status>id}" additionalText="{status>estado}" />
+						</ComboBox>
 					</fb:control>
 				</fb:FilterGroupItem>
 				<fb:FilterGroupItem groupName="__$INTERNAL$" name="FECHA" label="{i18n>dateRange}"
@@ -88,11 +94,11 @@
 			<items>
 				<ColumnListItem>
 
-					<Text class="yellow" text="{datosVarios>OrgVentas}" />
+					<Text text="{datosVarios>OrgVentas}" />
 
 
 					<Text text="{datosVarios>DocVentas}" />
-					<Text class="Yellow" text="{datosVarios>FechaDoc}" />
+					<Text  text="{datosVarios>FechaDoc}" />
 
 					<Text text="{datosVarios>FechaVigInicio}" />
 

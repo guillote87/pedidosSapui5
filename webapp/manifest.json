@@ -33,7 +33,11 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
-      }
+      },
+      "status": {
+        "uri": "model/status.json",
+        "type": "JSON"
+    }
     }
   },
   "sap.ui": {
@@ -87,7 +91,11 @@
         "dataSource": "orgSales",
         "preload": true,
         "settings": {}
-      }
+      },
+      "status": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "status"
+    }         
     },
     "resources": {
       "css": [{

@@ -17,43 +17,43 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (mlibrary,Controller, MessageToast, SearchField, Filter, FilterOperator, JSONModel, Fragment, Sorter, formatter, MessageBox, exportLibrary, Spreadsheet,TablePersoController) {
+    function (mlibrary, Controller, MessageToast, SearchField, Filter, FilterOperator, JSONModel, Fragment, Sorter, formatter, MessageBox, exportLibrary, Spreadsheet, TablePersoController) {
         "use strict";
         var EdmType = exportLibrary.EdmType
-        var ResetAllMode =  mlibrary.ResetAllMode;
+        var ResetAllMode = mlibrary.ResetAllMode;
 
         return Controller.extend("pedidos.controller.View1", {
 
             formatter: formatter,
             onInit: function () {
-           
+               
             },
             onSearch: function () {
-               
+
                 var that = this
 
                 var oModel = this.oView.getModel()
 
                 var oDataFilter = new Array()
- 
- // Format the date
-                var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "YYYYMMdd" }); 
+
+                // Format the date
+                var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({ pattern: "YYYYMMdd" });
                 var desde = dateFormat.format(this.getView().byId("fecha").getDateValue());
                 var hasta = dateFormat.format(this.getView().byId("fecha").getSecondDateValue());
-           
+
                 oDataFilter.push(
                     new Filter("OrgVentas", FilterOperator.EQ, this.getView().byId("orgventa").getValue())
                 )
                 oDataFilter.push(
                     new Filter("StatusPedido", FilterOperator.EQ, this.getView().byId("status").getValue())
                 )
-                if(desde && hasta){
+                if (desde && hasta) {
                     oDataFilter.push(
-                        new Filter("FechaCreacion",FilterOperator.BT,desde,hasta)
+                        new Filter("FechaCreacion", FilterOperator.BT, desde, hasta)
                     )
                 }
-               
-                
+
+
                 console.log(oDataFilter)
                 let queryFilter = new Array(
                     new Filter({
@@ -87,7 +87,7 @@ sap.ui.define([
                 })
 
             },
-            onCleanFilters: function(){
+            onCleanFilters: function () {
                 this.getView().byId("fecha").setValue(null);
                 this.getView().byId("status").setValue(null);
                 this.getView().byId("orgventa").setValue(null);
@@ -167,7 +167,7 @@ sap.ui.define([
             onPersoButtonPressed: function (oEvent) {
                 this._oTPC.openDialog();
             },
-    
+
 
 
 
