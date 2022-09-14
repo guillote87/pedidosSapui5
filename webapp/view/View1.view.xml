@@ -26,61 +26,83 @@
 						<Input id="status" type="Text" change="onChange" />
 					</fb:control>
 				</fb:FilterGroupItem>
-				<fb:FilterGroupItem groupName="__$INTERNAL$" name="FECHA" label="{i18n>dateRange}" partOfCurrentVariant="true" visibleInFilterBar="true"
-					visible="{view>/openDisplay}">
+				<fb:FilterGroupItem groupName="__$INTERNAL$" name="FECHA" label="{i18n>dateRange}"
+					partOfCurrentVariant="true" visibleInFilterBar="true" visible="{view>/openDisplay}">
 					<fb:control>
-						<DateRangeSelection id="fecha" displayFormat="short" valueFormat="yyyy-MM-dd-HH-mm-ss"  change="onDateChange"/>
+						<DateRangeSelection id="fecha" valueFormat="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
+							change="onDateChange" />
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem  groupName="clean" name="cleanDate" visibleInFilterBar="true" label="">
+					<fb:control >
+						<Button  class="stretch" icon="sap-icon://clear-filter" press="onCleanFilters" />
 					</fb:control>
 				</fb:FilterGroupItem>
 			</fb:filterGroupItems>
 		</fb:FilterBar>
-
-
-
-		<Table id="idTablaPedidos" inset="false"  growing="true"
-               growingThreshold="10"
-            items="{
+		<Table id="idTablaPedidos" class="testing" inset="false" growing="true" growingThreshold="10" items="{
 			path: 'datosVarios>/datos',
 			 sorter: [{
         		path: 'Usuario', 
         		descending: 'false'
       			}]
 		   }">
-		   	<headerToolbar>
-			<OverflowToolbar>
-				<Title text="Products" level="H2"/>
-				<ToolbarSpacer></ToolbarSpacer>
-				<Button	icon="sap-icon://download" press="onExport" />
-				<Button icon="sap-icon://excel-attachment" press="exportToExcel"/>
-			</OverflowToolbar>
-		</headerToolbar>
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="Products" level="H2" />
+					<ToolbarSpacer></ToolbarSpacer>
+					<Button icon="sap-icon://action-settings" press="onPersoButtonPressed" />
+					<Button icon="sap-icon://download" press="onExport" />
+					<Button icon="sap-icon://excel-attachment" press="exportToExcel" />
+				</OverflowToolbar>
+			</headerToolbar>
 			<columns>
-			<Column>
-					<Text text="Usuario" />
+				<Column>
+					<Text text="Org Ventas" />
+				</Column>
+				<Column>
+					<Text text="Documento" />
 				</Column>
 				<Column>
 					<Text text="Fecha Doc" />
 				</Column>
 				<Column>
-					<Text text="Org Ventas" />
-				</Column>				
-				<Column>
-					<Text text="Status Pedido" />
+					<Text text="Fecha Inicio Vigencia" />
 				</Column>
 				<Column>
-					<Text text="Valor Neto" />
+					<Text text="Fecha Inicio Fin" />
+				</Column>
+				<Column>
+					<Text text="Pedido Cliente" />
+				</Column>
+				<Column>
+					<Text text="Cliente" />
+				</Column>
+				<Column>
+					<Text text="Nombre" />
+				</Column>
+				<Column>
+					<Text text="Status Pedido" />
 				</Column>
 			</columns>
 			<items>
 				<ColumnListItem>
-					<cells>
-						<Text text="{datosVarios>Usuario}" />
-						<Text text="{datosVarios>FechaDoc}" />
-						<Text text="{datosVarios>OrgVentas}" />
-						<Text text="{path:'datosVarios>StatusPedido',
+
+					<Text class="yellow" text="{datosVarios>OrgVentas}" />
+
+
+					<Text text="{datosVarios>DocVentas}" />
+					<Text class="Yellow" text="{datosVarios>FechaDoc}" />
+
+					<Text text="{datosVarios>FechaVigInicio}" />
+
+					<Text text="{datosVarios>FechaVigFin}" />
+					<Text text="{datosVarios>PedidoCliente}" />
+					<Text text="{datosVarios>Cliente}" />
+					<Text text="{datosVarios>Nombre}" />
+					<Text text="{path:'datosVarios>StatusPedido',
 									formatter:'.formatter.statusText'}" />
-						<Text text="{datosVarios>ValorNeto}" />
-					</cells>
+
 				</ColumnListItem>
 			</items>
 		</Table>

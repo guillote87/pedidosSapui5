@@ -1,4 +1,5 @@
 sap.ui.define([
+    'sap/m/library',
     "sap/ui/core/mvc/Controller",
     'sap/m/MessageToast',
     'sap/m/SearchField',
@@ -11,31 +12,32 @@ sap.ui.define([
     "sap/m/MessageBox",
     'sap/ui/export/library',
     'sap/ui/export/Spreadsheet',
+    'sap/m/TablePersoController'
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast, SearchField, Filter, FilterOperator, JSONModel, Fragment, Sorter, formatter, MessageBox, exportLibrary, Spreadsheet) {
+    function (mlibrary,Controller, MessageToast, SearchField, Filter, FilterOperator, JSONModel, Fragment, Sorter, formatter, MessageBox, exportLibrary, Spreadsheet,TablePersoController) {
         "use strict";
         var EdmType = exportLibrary.EdmType
+        var ResetAllMode =  mlibrary.ResetAllMode;
+
         return Controller.extend("pedidos.controller.View1", {
 
             formatter: formatter,
             onInit: function () {
-
+           
             },
             onSearch: function () {
-                if (!this._requiredFieldsCompleted()) {
-                    MessageBox.error("Debes completar todos los filtros");
-                    return;
-                }
+               
                 var that = this
 
                 var oModel = this.oView.getModel()
 
                 var oDataFilter = new Array()
+ 
+ // Format the date
                 var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "YYYYMMdd" }); 
-// Format the date
                 var desde = dateFormat.format(this.getView().byId("fecha").getDateValue());
                 var hasta = dateFormat.format(this.getView().byId("fecha").getSecondDateValue());
            
@@ -45,9 +47,12 @@ sap.ui.define([
                 oDataFilter.push(
                     new Filter("StatusPedido", FilterOperator.EQ, this.getView().byId("status").getValue())
                 )
-                oDataFilter.push(
-                    new Filter("FechaCreacion", FilterOperator.BT, desde,hasta)
+                if(desde && hasta){
+                    oDataFilter.push(
+                        new Filter("FechaCreacion",FilterOperator.BT,desde,hasta)
                     )
+                }
+               
                 
                 console.log(oDataFilter)
                 let queryFilter = new Array(
@@ -81,6 +86,11 @@ sap.ui.define([
                     }
                 })
 
+            },
+            onCleanFilters: function(){
+                this.getView().byId("fecha").setValue(null);
+                this.getView().byId("status").setValue(null);
+                this.getView().byId("orgventa").setValue(null);
             },
             _requiredFieldsCompleted: function () {
 
@@ -154,6 +164,10 @@ sap.ui.define([
                     oSheet.destroy();
                 });
             },
+            onPersoButtonPressed: function (oEvent) {
+                this._oTPC.openDialog();
+            },
+    
 
 
 

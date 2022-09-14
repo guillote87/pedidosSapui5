@@ -1,1 +1,12 @@
 /* Enter your custom styles here */
+
+.testing tbody tr:nth-child(even) {
+   background:  rgb(245, 245, 245);
+    } 
+    .yellow{
+        background: yellow
+      }
+      .stretch span{
+        width: 25%;
+      }
+     
